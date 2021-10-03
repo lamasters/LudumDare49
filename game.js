@@ -282,6 +282,7 @@ function loadQuestionState() {
   promptIndex = 0;
   lastIndex = -1;
   answers = [];
+  nextText.text = "Use the arrow keys and \"enter\" to select";
 }
 
 function questionState() {
@@ -430,6 +431,7 @@ function calculateFuture() {
 function loadLifeState() {
   promptText.text = '';
   promptIndex = 0;
+  nextText.text = '';
   lastIndex = -1;
   dialogueIndex = 0;
   menuMusic.stop();
