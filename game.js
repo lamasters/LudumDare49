@@ -26,6 +26,8 @@ function preload ()
   this.load.image('desk-lady', 'assets/desk-lady.png');
   this.load.image('desk', 'assets/desk.png', {frameWidth: 600, frameHeight: 200});
   this.load.image('sun', 'assets/sun.png', {frameWidth: 640, frameHeight: 480});
+  this.load.image('heart', 'assets/heart.png', {frameWidth: 640, frameHeight: 480});
+  this.load.image('brokenheart', 'assets/brokenheart.png', {frameWidth: 640, frameHeight: 480});
 
   this.load.audio('somber', ['assets/Life\ Is\ -\ Song\ 1.mp3']);
   this.load.audio('upbeat', ['assets/Life\ Is\ -\ Song\ 2.mp3']);
@@ -137,6 +139,8 @@ var curQuestion;
 var answer_text;
 var selection = 0;
 var pressed = false;
+var heart;
+var brokenheart;
 
 var lifeDialogue;
 var textScale;
@@ -148,6 +152,10 @@ function create ()
   sunlight.color.setTo(252, 186, 3);
   lady = this.add.image(320, 320, 'desk-lady');
   desk = this.add.image(320, 380, 'desk');
+  heart = this.add.image(320, 360, 'heart');
+  heart.alpha = 0.0;
+  brokenheart = this.add.image(320, 360, 'brokenheart');
+  brokenheart.alpha = 0.0;
   
   menuMusic = this.sound.add('menu', {loop: true, volume: 0.5});
   somberMusic = this.sound.add('somber', {loop: false, volume: 0.7});
@@ -437,8 +445,10 @@ function loadLifeState() {
   menuMusic.stop();
   if (positivity > 0.5) {
     upbeatMusic.play();
+    heart.alpha = 1.0;
   } else {
     somberMusic.play();
+    brokenheart.alpha = 1.0;
   }
   lifeDialogue.push("If your life didn't turn out the way you expected, don't worry...");
   lifeDialogue.push("...there is beauty in the randomness...");
@@ -477,8 +487,10 @@ function lifeState() {
       nextText.text = '';
       if (positivity > 0.5) {
         upbeatMusic.stop();
+        heart.alpha = 0.0;
       } else {
         somberMusic.stop();
+        brokenheart.alpha = 0.0;
       }
     }
   }
